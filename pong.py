@@ -1,5 +1,6 @@
-import sys
 import random
+import sys
+
 import pygame
 
 # Konstanta layar
@@ -51,7 +52,7 @@ class Ball:
         vx = 1 if random.random() < 0.5 else -1
         vy = angle
         # Normalisasi kecepatan
-        mag = (vx ** 2 + vy ** 2) ** 0.5
+        mag = (vx**2 + vy**2) ** 0.5
         self.vx = (vx / mag) * BALL_SPEED
         self.vy = (vy / mag) * BALL_SPEED
         if direction == "left":
@@ -82,14 +83,14 @@ def reflect_ball_from_paddle(ball: Ball, paddle: Paddle):
     offset = (ball.rect.centery - paddle.rect.centery) / (paddle.rect.height / 2)
     offset = clamp(offset, -1.0, 1.0)
 
-    speed = (ball.vx ** 2 + ball.vy ** 2) ** 0.5
+    speed = (ball.vx**2 + ball.vy**2) ** 0.5
     # Sudut baru: X berlawanan arah, Y proporsional offset
     ball.vx = -ball.vx
     ball.vy = offset * speed
 
     # Normalisasi agar kecepatan tetap konstan (sedikit tambah akselerasi kecil)
     speed *= 1.03
-    mag = (ball.vx ** 2 + ball.vy ** 2) ** 0.5
+    mag = (ball.vx**2 + ball.vy**2) ** 0.5
     if mag != 0:
         ball.vx = (ball.vx / mag) * speed
         ball.vy = (ball.vy / mag) * speed
